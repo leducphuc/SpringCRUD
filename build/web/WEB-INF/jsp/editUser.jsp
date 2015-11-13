@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,7 +19,7 @@
         ${user.username}
         ${user.password}
         
-        <form:form method="post"  action="./updateUser.html" commandName="user">
+        <form:form method="post"  action="../updateUser.html" commandName="user">
             ID <form:input path="id"/>
             Name <form:input path="username"/>
             Password <form:input path="password"/>

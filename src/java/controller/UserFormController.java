@@ -37,7 +37,6 @@ public class UserFormController {
     @RequestMapping(value="/info",method=RequestMethod.GET)
     public String info(ModelMap mm){
         List<User> list = userJDBCTemplate.listUser();
-        mm.put("dautien",list.get(1));
         mm.put("list", list);
         return "info";
     }
@@ -48,10 +47,9 @@ public class UserFormController {
         return "redirect:./info";
     }
     
-    @RequestMapping(value = "/editUser", method = RequestMethod.GET)
-    public String edit(@RequestParam String id, @ModelAttribute(value = "user") User user, ModelMap mm){
+    @RequestMapping(value = "/editUser/{id}", method = RequestMethod.GET)
+    public String edit(@PathVariable(value="id") String id, @ModelAttribute(value = "user") User user, ModelMap mm){
         user = userJDBCTemplate.getUser(Integer.parseInt(id));
-        System.out.println("user id la: "+id);
         mm.put("user", user);
         return "editUser";
     }
@@ -60,15 +58,20 @@ public class UserFormController {
         userJDBCTemplate.update(user);
 
         mm.put("user", user);
-        return "redirect:./info";
+        return "redirect:info.html";
     }
     
-    @RequestMapping(value="/check",method=RequestMethod.GET)
+    @RequestMapping(value="/check",method=RequestMethod.POST)
     public String check(@ModelAttribute(value="user")User user,ModelMap mm){
         if (userJDBCTemplate.checkLogin(user)){
-            mm.put("chao",user);
-            return "xinchao";
+            mm.put("user",user);
+            return "redirect:info.html";
         }else{
             return "create";}
+    }
+    @RequestMapping(value="/login",method=RequestMethod.GET)
+    public String login(@ModelAttribute(value="user")User user,ModelMap mm){
+        mm.addAttribute("user", user);
+        return "login";
     }
 }

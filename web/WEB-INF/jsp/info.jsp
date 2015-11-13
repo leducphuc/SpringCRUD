@@ -24,7 +24,7 @@
                     <td>${s.id}</td>
                     <td>${s.username}</td>
 
-                    <td><a href="editUser?id=${s.id}.html">edit</a></td>
+                    <td><a href="/DemoSpring/user_form/editUser/${s.id}.html">edit</a></td>
                     <td><a href="deleteUser/${s.id}">delete</a></td>
                 </tr>
 

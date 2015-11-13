@@ -51,4 +51,5 @@ public class UserJDBCTemplate {
         jdbcTemplate.update(sql,  new Object[] { user.getUsername(),user.getPassword(),user.getId() });
         return;
     }
+
 }
